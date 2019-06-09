@@ -3,17 +3,44 @@
     <h1 class="subheading grey--text">Team</h1>
 
     <v-container class="my-5">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <v-layout row wrap>
+        <v-flex xs12 sm6 md4 lg3 v-for="person in team" :key="person.name">
+          <v-card flat class="text-xs-center ma-3">
+            <v-responsive class="pt-4">
+              <v-avatar size="100" class="grey lighten-2">
+                <img :src="person.avatar">
+              </v-avatar>
+            </v-responsive>
+            <v-card-text>
+              <div class="subheading">{{ person.name }}</div>
+              <div class="grey--text">{{ person.role }}</div>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn flat color="grey">
+                <v-icon small left>message</v-icon>
+                <span>Message</span>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </v-container>
 
   </div>
 </template>
 
 <script>
-  export default {
-    components: {
-
+export default {
+  data() {
+    return {
+      team: [
+        { name: 'The Net Ninja', role: 'Web developer', avatar: '/avatar-1.png' },
+        { name: 'Ryu', role: 'Graphic designer', avatar: '/avatar-2.png' },
+        { name: 'Chun Li', role: 'Web developer', avatar: '/avatar-3.png' },
+        { name: 'Gouken', role: 'Social media maverick', avatar: '/avatar-4.png' },
+        { name: 'Yoshi', role: 'Sales guru', avatar: '/avatar-5.png' }
+      ]
     }
   }
+}
 </script>
