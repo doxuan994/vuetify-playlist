@@ -6,10 +6,10 @@
       <v-btn flat color="white" @click="snackbar = false">Close</v-btn>
     </v-snackbar>
 
-    <!-- <v-snackbar v-model="snackbar" :timeout="4000" top color="success">
+    <v-snackbar v-model="snackbarNote" :timeout="4000" top color="success">
       <span>Awesome! You added a new note.</span>
-      <v-btn flat color="white" @click="snackbar = false">Close</v-btn>
-    </v-snackbar> -->
+      <v-btn flat color="white" @click="snackbarNote = false">Close</v-btn>
+    </v-snackbar>
 
 
     <v-toolbar flat app>
@@ -51,7 +51,7 @@
           <Popup @projectAdded="snackbar = true"/>
         </v-flex>
         <v-flex class="">
-            <AddNote />
+            <AddNote @noteAdded="snackbarNote = true"/>
         </v-flex>
       </v-layout>
       <v-list>
@@ -79,7 +79,8 @@ export default {
         { icon: 'person', text: 'Team', route: '/team' },
         { icon: 'note_add', text: 'Notes', route: '/notes' }
       ],
-      snackbar: false
+      snackbar: false,
+      snackbarNote: false
     }
   },
   components: {

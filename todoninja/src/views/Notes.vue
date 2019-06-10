@@ -8,7 +8,7 @@
           <v-card flat class="text-xs-center ma-3">
 
             <!-- <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="150px"></v-img> -->
-            <v-img :src="note.url" height="150px"></v-img>
+            <v-img :src="note.src" height="150px"></v-img>
 
 
             <v-card-text>
@@ -32,16 +32,32 @@
 </template>
 
 <script>
+import db from '@/fb';
+
 export default {
   data() {
     return {
       notes: [
-        { title: 'Check emails', content: 'Check emails of interns every morning at 8:00AM!', url: '/card-img-1.jpg' },
-        { title: 'Talk to team members', content: 'Talk to The Net Ninja, Ryu and Chun Li!', url: '/card-img-2.jpg' },
-        { title: 'Add more team members', content: 'Yoshi is the new team member.', url: '/card-img-3.jpg' },
-        { title: 'Remove old projects', content: 'Remove overdue projects!', url: '/card-img-4.jpg' },
+        // { title: 'Check emails', content: 'Check emails of interns every morning at 8:00AM!', src: '/card-img-1.jpg' },
+        // { title: 'Talk to team members', content: 'Talk to The Net Ninja, Ryu and Chun Li!', src: '/card-img-2.jpg' },
+        // { title: 'Add more team members', content: 'Yoshi is the new team member.', src: '/card-img-3.jpg' },
+        // { title: 'Remove old projects', content: 'Remove overdue projects!', src: '/card-img-4.jpg' },
       ]
     }
+  },
+  created() {
+    db.collection('notes').onSnapshot(res => {
+      const changes = res.docChanges();
+
+      changes.forEach(change => {
+        if (change.type === 'added') {
+          this.notes.push({
+            ...change.doc.data(),
+            id: change.doc.id
+          })
+        }
+      })
+    })
   }
 }
 </script>

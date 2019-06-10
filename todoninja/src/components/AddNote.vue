@@ -10,6 +10,12 @@
           <v-text-field label="Title" v-model="title" prepend-icon="folder" :rules="inputRules"></v-text-field>
           <v-textarea label="Content" v-model="content" prepend-icon="edit" :rules="inputRules"></v-textarea>
 
+
+          <v-select :items="images" v-model="pickedImage" label="Image" prepend-icon="add_a_photo">
+
+          </v-select>
+
+
           <v-menu>
             <v-text-field :value="formattedDate" slot="activator" label="Due date" prepend-icon="date_range" :rules="inputRules"></v-text-field>
             <v-date-picker v-model="due" :landscape="landscape" color="green lighten-1"></v-date-picker>
@@ -41,6 +47,13 @@ export default {
       loading: false,
       dialog: false,
       landscape: false,
+      images: [
+        { text: 'Image One', value: '/card-img-1.jpg' },
+        { text: 'Image Two', value: '/card-img-2.jpg' },
+        { text: 'Image Three', value: '/card-img-3.jpg' },
+        { text: 'Image Four', value: '/card-img-4.jpg' }
+      ],
+      pickedImage: ''
     }
   },
   components: {
@@ -49,7 +62,26 @@ export default {
   methods: {
     submitNewNote() {
       if (this.$refs.form.validate()) {
-        console.log("Add a new note");
+
+        // console.log(this.title, this.content, this.pickedImage, format(this.due, 'Do MMM YYYY'));
+
+
+        // this.loading = true;
+
+        const note = {
+          title: this.title,
+          content: this.content,
+          src: this.pickedImage,
+          due: format(this.due, 'Do MMM YYYY'),
+        }
+
+        db.collection('notes').add(note).then(() => {
+          this.loading = false;
+          this.dialog = false;
+          this.$emit('noteAdded');
+        });
+
+
 
       }
     }
