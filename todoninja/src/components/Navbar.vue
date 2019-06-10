@@ -6,6 +6,11 @@
       <v-btn flat color="white" @click="snackbar = false">Close</v-btn>
     </v-snackbar>
 
+    <!-- <v-snackbar v-model="snackbar" :timeout="4000" top color="success">
+      <span>Awesome! You added a new note.</span>
+      <v-btn flat color="white" @click="snackbar = false">Close</v-btn>
+    </v-snackbar> -->
+
 
     <v-toolbar flat app>
       <v-toolbar-side-icon class="grey--text" @click="drawer = ! drawer"></v-toolbar-side-icon>
@@ -42,8 +47,11 @@
           </v-avatar>
           <p class="white--text subheading mt-1">The Net Ninja</p>
         </v-flex>
-        <v-flex class="mt-4 mb-3">
+        <v-flex class="my-1">
           <Popup @projectAdded="snackbar = true"/>
+        </v-flex>
+        <v-flex class="">
+            <AddNote />
         </v-flex>
       </v-layout>
       <v-list>
@@ -59,6 +67,7 @@
 
 <script>
 import Popup from './Popup';
+import AddNote from './AddNote';
 
 export default {
   data() {
@@ -68,12 +77,14 @@ export default {
         { icon: 'dashboard', text: 'Dashboard', route: '/' },
         { icon: 'folder', text: 'My Projects', route: '/projects' },
         { icon: 'person', text: 'Team', route: '/team' },
+        { icon: 'note_add', text: 'Notes', route: '/notes' }
       ],
       snackbar: false
     }
   },
   components: {
-    Popup
+    Popup,
+    AddNote
   }
 }
 </script>
