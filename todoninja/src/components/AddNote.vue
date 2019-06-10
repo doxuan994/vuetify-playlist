@@ -62,11 +62,7 @@ export default {
   methods: {
     submitNewNote() {
       if (this.$refs.form.validate()) {
-
-        // console.log(this.title, this.content, this.pickedImage, format(this.due, 'Do MMM YYYY'));
-
-
-        // this.loading = true;
+        this.loading = true;
 
         const note = {
           title: this.title,
@@ -80,8 +76,6 @@ export default {
           this.dialog = false;
           this.$emit('noteAdded');
         });
-
-
 
       }
     }
