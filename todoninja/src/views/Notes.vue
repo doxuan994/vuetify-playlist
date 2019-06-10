@@ -6,8 +6,6 @@
       <v-layout row wrap>
         <v-flex xs12 sm6 md4 lg3 v-for="note in notes" :key="note.id">
           <v-card flat class="text-xs-center ma-3">
-
-            <!-- <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="150px"></v-img> -->
             <v-img :src="note.src" height="150px"></v-img>
 
 
@@ -20,7 +18,16 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn flat>Share</v-btn>
+              <v-menu transition="scale-transition">
+                <template v-slot:activator="{ on }">
+                  <v-btn flat dark color="primary" v-on="on" class="ml-1">Scale Transition</v-btn>
+                </template>
+                <v-list>
+                  <v-list-tile v-for="n in 5" :key="n" @click="">
+                    <v-list-tile-title v-text="'Item ' + n"></v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
             </v-card-actions>
 
           </v-card>
@@ -60,7 +67,7 @@ export default {
     })
   },
   methods: {
-    
+
   }
 }
 </script>
