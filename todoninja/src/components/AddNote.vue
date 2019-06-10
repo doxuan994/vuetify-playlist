@@ -11,9 +11,7 @@
           <v-textarea label="Content" v-model="content" prepend-icon="edit" :rules="inputRules"></v-textarea>
 
 
-          <v-select :items="images" v-model="pickedImage" label="Image" prepend-icon="add_a_photo">
-
-          </v-select>
+          <v-select :items="images" v-model="pickedImage" label="Image" prepend-icon="add_a_photo"></v-select>
 
 
           <v-menu>

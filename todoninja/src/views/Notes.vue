@@ -18,13 +18,13 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-menu transition="scale-transition">
-                <template v-slot:activator="{ on }">
-                  <v-btn flat dark color="primary" v-on="on" class="ml-1">Scale Transition</v-btn>
-                </template>
+              <v-menu offset-y transition="slide-x-transition">
+                <v-btn flat color="grey" slot="activator">
+                  <span>Menu</span>
+                </v-btn>
                 <v-list>
-                  <v-list-tile v-for="n in 5" :key="n" @click="">
-                    <v-list-tile-title v-text="'Item ' + n"></v-list-tile-title>
+                  <v-list-tile v-for="link in links" :key="link.text" router :to="link.route" >
+                    <v-list-tile-title>{{ link.text }}</v-list-tile-title>
                   </v-list-tile>
                 </v-list>
               </v-menu>
@@ -49,7 +49,14 @@ export default {
         // { title: 'Talk to team members', content: 'Talk to The Net Ninja, Ryu and Chun Li!', src: '/card-img-2.jpg' },
         // { title: 'Add more team members', content: 'Yoshi is the new team member.', src: '/card-img-3.jpg' },
         // { title: 'Remove old projects', content: 'Remove overdue projects!', src: '/card-img-4.jpg' },
-      ]
+      ],
+      links: [
+        { icon: 'dashboard', text: 'Dashboard', route: '/' },
+        { icon: 'folder', text: 'My Projects', route: '/projects' },
+        { icon: 'person', text: 'Team', route: '/team' },
+        { icon: 'note_add', text: 'Notes', route: '/notes' }
+      ],
+
     }
   },
   created() {
